@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace VioRentals___platforma_z_filmami.Data.Migrations
+namespace VioRentals.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

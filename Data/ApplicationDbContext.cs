@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace VioRentals___platforma_z_filmami.Data
+namespace VioRentals.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

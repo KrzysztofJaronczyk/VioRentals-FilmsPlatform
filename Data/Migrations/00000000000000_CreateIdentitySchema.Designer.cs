@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
-using VioRentals___platforma_z_filmami.Data;
+using VioRentals.Data;
 
-namespace VioRentals___platforma_z_filmami.Data.Migrations
+namespace VioRentals.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]

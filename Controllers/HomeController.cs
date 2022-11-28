@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using VioRentals___platforma_z_filmami.Models;
+using VioRentals.Models;
 
-namespace VioRentals___platforma_z_filmami.Controllers
+namespace VioRentals.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,4 +1,4 @@
-namespace VioRentals___platforma_z_filmami.Models
+namespace VioRentals.Models
 {
     public class ErrorViewModel
     {

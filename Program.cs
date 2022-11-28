@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using VioRentals___platforma_z_filmami.Data;
+using VioRentals.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +35,16 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "MoviesByRelaseDate",
+    pattern: "{controller=Movies}/{action=ByReleaseDate}/{id?}");
+
+app.MapRoute(
+    "MoviesByRelaseDate",
+    "movies/relased/{year}/{month},",
+    new {controller="Movies", action="ByReleaseDate"},
+        new{year=@"2015|2016", month=@"\d{2}"});
 
 app.MapControllerRoute(
     name: "default",

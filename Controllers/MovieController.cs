@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VioRentals.Models;
+using VioRentals.ViewModels;
 
 namespace VioRentals.Controllers
 {
@@ -7,13 +8,20 @@ namespace VioRentals.Controllers
     {
         public IActionResult Random()
         {
-            var movie = new Movie() { Name = "Shrek!" };
-            return View(movie);
-        }
+            var movie = new Movies() { Name = "Shrek!" };
 
-        public IActionResult ByReleaseDate(int year, int month)
-        {
-            return Content(year + "/" + month);
+            var Custumers = new List<Custumer>
+            {
+                new Custumer { Name = "Custumer 1" },
+                new Custumer { Name = "Custumer 2" }
+            };
+
+            var viewModel = new RandomMovieViewModel
+            {
+                Movie = movie,
+                Customers = Custumers
+            };
+            return View(viewModel);
         }
     }
 }

@@ -226,7 +226,7 @@ namespace VioRentals.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("VioRentals.Models.Custumer", b =>
+            modelBuilder.Entity("VioRentals.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -321,7 +321,7 @@ namespace VioRentals.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VioRentals.Models.Custumer", b =>
+            modelBuilder.Entity("VioRentals.Models.Customer", b =>
                 {
                     b.HasOne("VioRentals.Models.MembershipType", "MembershipType")
                         .WithMany()

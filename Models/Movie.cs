@@ -1,8 +1,8 @@
 ﻿namespace VioRentals.Models
 {
-    public class Movies
+    public class Movie
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

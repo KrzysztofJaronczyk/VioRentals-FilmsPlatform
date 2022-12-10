@@ -17,11 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Movie\Random.cshtml" />
+    <UpToDateCheckInput Remove="Views\Movies\Random.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Movie\Random.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Movies\Random.cshtml" />
   </ItemGroup>
 
 </Project>

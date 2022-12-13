@@ -23,13 +23,12 @@ namespace VioRentals.Controllers
                 MembershipTypes = membershipTypes
             };
             
-            return View(viewModel);
+            return View("NewCustomer", viewModel);
         }
 
         [HttpPost]
-        public ActionResult Create(NewCustomerViewModel viewModel)
+        public ActionResult Create(Customer customer)
         {
-            var customer = viewModel.Customer;
             _context.Customers.Add(customer);
             _context.SaveChanges();
 
@@ -48,6 +47,21 @@ namespace VioRentals.Controllers
             if (customer == null)
                 return NotFound();
             return View(customer);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            if (customer == null)
+                return NotFound();
+
+            var viewModel = new NewCustomerViewModel
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+
+            return View("NewCustomer", viewModel);
         }
     }
 }

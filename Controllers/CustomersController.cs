@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using VioRentals.Data;
 using VioRentals.Models;
+using VioRentals.ViewModels;
 
 namespace VioRentals.Controllers
 {
@@ -14,6 +15,27 @@ namespace VioRentals.Controllers
             _context = context;
         }
 
+        public ActionResult New()
+        {
+            var membershipTypes = _context.MembershipTypes.ToList();
+            var viewModel = new NewCustomerViewModel
+            {
+                MembershipTypes = membershipTypes
+            };
+            
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Create(NewCustomerViewModel viewModel)
+        {
+            var customer = viewModel.Customer;
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Customers");
+        }
+    
         public IActionResult Index()
         {
             var customers = _context.Customers.Include(c => c.MembershipType).ToList();
@@ -26,11 +48,6 @@ namespace VioRentals.Controllers
             if (customer == null)
                 return NotFound();
             return View(customer);
-        }
-
-        public ActionResult New()
-        {
-            return View();
         }
     }
 }

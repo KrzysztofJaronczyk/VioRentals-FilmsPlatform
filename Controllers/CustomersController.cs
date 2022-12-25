@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using VioRentals.Data;
 using VioRentals.Models;
 using VioRentals.ViewModels;
-
 namespace VioRentals.Controllers
 {
     public class CustomersController : Controller
@@ -23,13 +22,23 @@ namespace VioRentals.Controllers
                 MembershipTypes = membershipTypes
             };
             
-            return View("NewCustomer", viewModel);
+            return View("CustomerForm", viewModel);
         }
 
         [HttpPost]
-        public ActionResult Create(Customer customer)
+        public ActionResult Save(Customer customer)
         {
-            _context.Customers.Add(customer);
+            if(customer.Id ==0)
+                _context.Customers.Add(customer);
+            else
+            {
+                var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
+
+                customerInDb.Name = customer.Name;
+                customerInDb.DateOfBirth = customer.DateOfBirth;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+            }
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Customers");
@@ -61,7 +70,7 @@ namespace VioRentals.Controllers
                 MembershipTypes = _context.MembershipTypes.ToList()
             };
 
-            return View("NewCustomer", viewModel);
+            return View("CustomerForm", viewModel);
         }
     }
 }

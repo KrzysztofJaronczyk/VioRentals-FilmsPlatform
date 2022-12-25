@@ -70,6 +70,13 @@ namespace VioRentals.Data.Migrations
             migrationBuilder.Sql("INSERT INTO Movies (Name, Genre, ReleaseDate, DateAdded, NumberInStock) VALUES ('The Hunger Games: Mockingjay - Part 1', 'Adventure', '2014-11-21', '2022-11-12', 5)");
             migrationBuilder.Sql("INSERT INTO Movies (Name, Genre, ReleaseDate, DateAdded, NumberInStock) VALUES ('The Hunger Games: Mockingjay - Part 2', 'Adventure', '2015-11-20', '2022-11-12', 5)");
             migrationBuilder.Sql("INSERT INTO Movies (Name, Genre, ReleaseDate, DateAdded, NumberInStock) VALUES ('The Incredibles', 'Family', '2004-11-05', '2022-11-12', 3)");
+            //add records to custommers
+            migrationBuilder.Sql("INSERT INTO Customers (Name, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('John Smith', 0, 1, '1990-01-01')");
+            migrationBuilder.Sql("INSERT INTO Customers (Name, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Mary Williams', 1, 2, '1999-01-01')");
+            migrationBuilder.Sql("INSERT INTO Customers (Name, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Robert Johnson', 0, 3, '2001-01-01')");
+            migrationBuilder.Sql("INSERT INTO Customers (Name, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Patricia Jones', 1, 4, '2005-01-01')");
+            migrationBuilder.Sql("INSERT INTO Customers (Name, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Michael Brown', 0, 1, NULL)");
+            migrationBuilder.Sql("INSERT INTO Customers (Name, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Linda Davis', 1, 2, NULL)");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

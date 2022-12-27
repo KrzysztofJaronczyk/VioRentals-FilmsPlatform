@@ -8,6 +8,7 @@ namespace VioRentals.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<MembershipType> MembershipTypes { get; set; }
+        public DbSet<Genre> Genres { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -16,5 +17,11 @@ namespace VioRentals.Data
         public ApplicationDbContext()
         {
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=VioRentals;Trusted_Connection=True;");
+        }
+        
     }
 }

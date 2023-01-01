@@ -30,7 +30,7 @@ else
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)
+                        @Html.ActionLink(customer.Name+" "+customer.Surname, "Edit", "Customers", new { id = customer.Id }, null)
                     </td>
                     <td>
                         @customer.MembershipType.DiscountRate%

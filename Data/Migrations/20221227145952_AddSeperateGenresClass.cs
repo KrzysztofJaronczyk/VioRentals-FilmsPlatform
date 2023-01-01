@@ -110,12 +110,13 @@ namespace VioRentals.Data.Migrations
             
 
             //add records to custommers
-            migrationBuilder.Sql("INSERT INTO Customers (Name, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('John Smith', 0, 1, '1990-01-01')");
-            migrationBuilder.Sql("INSERT INTO Customers (Name, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Mary Williams', 1, 2, '1999-01-01')");
-            migrationBuilder.Sql("INSERT INTO Customers (Name, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Robert Johnson', 0, 3, '2001-01-01')");
-            migrationBuilder.Sql("INSERT INTO Customers (Name, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Patricia Jones', 1, 4, '2005-01-01')");
-            migrationBuilder.Sql("INSERT INTO Customers (Name, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Michael Brown', 0, 1, NULL)");
-            migrationBuilder.Sql("INSERT INTO Customers (Name, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Linda Davis', 1, 2, NULL)");
+            migrationBuilder.Sql("INSERT INTO Customers (Name, Surname, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('John', 'Smith', 0, 1, '1990-01-01')");
+            migrationBuilder.Sql("INSERT INTO Customers (Name, Surname, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Mary', 'Williams', 1, 2, '1990-01-01')");
+            migrationBuilder.Sql("INSERT INTO Customers (Name, Surname, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Robert', 'Jones', 0, 3, '1990-01-01')");
+            migrationBuilder.Sql("INSERT INTO Customers (Name, Surname, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Linda', 'Brown', 1, 4, '1990-01-01')");
+            migrationBuilder.Sql("INSERT INTO Customers (Name, Surname, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('William', 'Davis', 0, 1, '1990-01-01')");
+            migrationBuilder.Sql("INSERT INTO Customers (Name, Surname, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Michael', 'Brown', 0, 1, NULL)");
+            migrationBuilder.Sql("INSERT INTO Customers (Name, Surname, IsSubscribedToNewsletter, MembershipTypeId, DateOfBirth) VALUES ('Linda', 'Davis', 1, 2, NULL)");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

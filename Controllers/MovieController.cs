@@ -109,5 +109,16 @@ namespace VioRentals.Controllers
 
             return View(viewModel);
         }
+
+        public JsonResult ValidateReleaseDate(DateTime? releaseDate)
+        {
+            if (releaseDate.HasValue && releaseDate.Value > DateTime.Today)
+            {
+                return Json("Release Date cannot be in the future.");
+            }
+
+            return Json(true);
+        }
+
     }
 }

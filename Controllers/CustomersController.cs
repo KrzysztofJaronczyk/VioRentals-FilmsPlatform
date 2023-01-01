@@ -52,6 +52,7 @@ namespace VioRentals.Controllers
             {
                 var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
                 customerInDb.Name = customer.Name;
+                customerInDb.Surname = customer.Surname;
                 customerInDb.DateOfBirth = customer.DateOfBirth;
                 customerInDb.MembershipTypeId = customer.MembershipTypeId;
                 customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;

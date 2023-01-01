@@ -10,7 +10,15 @@
 <ul>
     <li>Movie name: @Html.DisplayFor(model => model.Name)</li>
     <li>Genre: @Html.DisplayFor(model => model.Genre)</li>
-    <li>Release date: @Model.ReleaseDate.ToShortDateString()</li>
+    <li>Release date:
+    @if (Model.ReleaseDate.HasValue)
+    {
+        @Model.ReleaseDate.Value.ToString("d MMM yyyy")
+    }
+    else
+    {
+        @Html.DisplayFor(model => model.ReleaseDate)
+    }
     <li>Added date: @Model.DateAdded.ToShortDateString()</li>
     <li>Number in stock: @Html.DisplayFor(model => model.NumberInStock)</li>
 </ul>

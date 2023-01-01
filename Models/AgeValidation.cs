@@ -12,6 +12,8 @@ namespace VioRentals.Models
                 return ValidationResult.Success;
             if (customer.DateOfBirth == null)
                 return new ValidationResult("Date of Birth is required.");
+            if (customer.DateOfBirth > DateTime.Today)
+                return new ValidationResult("Date of Birth cannot be in the future.");
             var age = DateTime.Today.Year - customer.DateOfBirth.Value.Year;
             return (age >= 18)
                 ? ValidationResult.Success

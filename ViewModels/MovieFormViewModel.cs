@@ -24,7 +24,7 @@ namespace VioRentals.ViewModels
 
         [Range(1, 20)]
         [Display(Name = "Number in Stock")]
-        [Required]
+        [Required(ErrorMessage = "Please enter customer's name.")]
         public byte ?NumberInStock { get; set; }
         public string Title
         {
@@ -46,7 +46,5 @@ namespace VioRentals.ViewModels
             ReleaseDate = movie.ReleaseDate;
             NumberInStock = movie.NumberInStock;
         }
-
-
     }
 }

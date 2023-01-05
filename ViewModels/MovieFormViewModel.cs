@@ -1,5 +1,4 @@
-﻿using Humanizer.Localisation;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 using VioRentals.Models;
 

@@ -1,70 +1,84 @@
-﻿using System.Collections.Generic;
+﻿using System.Net;
+using System.Web.Http;
+using AutoMapper;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using VioRentals.Models;
 using VioRentals.Data;
+using VioRentals.Dtos;
+using VioRentals.Models;
 
 namespace VioRentals.Controllers.Api
 {
-    [Route("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public CustomersController(ApplicationDbContext context)
+        private readonly IMapper _mapper;
+
+        public CustomersController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
+
         //GET /api/customers
-        [HttpGet]
-        public IEnumerable<Customer> GetCustomers()
+        [Microsoft.AspNetCore.Mvc.HttpGet]
+        public IEnumerable<CustomerDto> GetCustomers()
         {
-            return _context.Customers.ToList();
+            return _mapper.Map<IEnumerable<CustomerDto>>(_context.Customers.Include(c => c.MembershipType));
         }
 
         //GET /api/customers/1
-        [HttpGet("{id}")]
-        public ActionResult<Customer> GetCustomer(int id)
+        [Microsoft.AspNetCore.Mvc.HttpGet("{id}")]
+        public ActionResult<CustomerDto> GetCustomer(int id)
         {
-            var customer = _context.Customers.Find(id);
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
             if (customer == null)
-            {
                 return NotFound();
-            }
-            return customer;
+
+            return Ok(_mapper.Map<Customer, CustomerDto>(customer));
         }
 
+
         //POST /api/customers
-        [HttpPost]
-        public IActionResult CreateCustomer(Customer customer)
+        //201 request (created) 
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        public CreatedResult CreateCustomer(CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            var customer = _mapper.Map<CustomerDto, Customer>(customerDto);
             _context.Customers.Add(customer);
             _context.SaveChanges();
-            return Ok(customer);
+
+            customerDto.Id = customer.Id;
+
+            return Created(new Uri(Request.GetDisplayUrl() + "/" + customer.Id), customerDto);
         }
 
         //PUT /api/customers/1
-        [HttpPut("{id}")]
-        public IActionResult UpdateCustomer(int id, Customer customer)
+        [Microsoft.AspNetCore.Mvc.HttpPut("{id}")]
+        public void UpdateCustomer(int id, CustomerDto customerDto)
         {
-            if (id != customer.Id)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                //return badrequest
+                BadRequest(ModelState);
+                return;
             }
+            var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
+            if (customerInDb == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            _context.Entry(customer).State = EntityState.Modified;
+            _mapper.Map(customerDto, customerInDb);
             _context.SaveChanges();
-            return NoContent();
         }
 
         //DELETE /api/customers/1
-        [HttpDelete("{id}")]
+        [Microsoft.AspNetCore.Mvc.HttpDelete("{id}")]
         public ActionResult<Customer> DeleteCustomer(int id)
         {
             var customer = _context.Customers.Find(id);

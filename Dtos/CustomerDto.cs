@@ -13,7 +13,6 @@ namespace VioRentals.Dtos
         [StringLength(100)]
         public string Surname { get; set; }
 
-        [AgeValidation]
         public DateTime? DateOfBirth { get; set; }
 
         public bool IsSubscribedToNewsletter { get; set; }

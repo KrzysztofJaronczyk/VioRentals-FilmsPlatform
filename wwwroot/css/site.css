@@ -24,3 +24,8 @@ body {
 .input-validation-error {
     border-color: #a94442;
 }
+
+.navbar-nav a.active {
+    color: white;
+    font-weight: bold;
+}

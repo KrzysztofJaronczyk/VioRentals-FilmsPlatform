@@ -8,7 +8,7 @@ namespace VioRentals.Controllers
     public class CustomersController : Controller
     {
         private ApplicationDbContext _context;
-
+        private bool HasErrors = false;
         public CustomersController()
         {
             _context = new ApplicationDbContext();
@@ -40,7 +40,9 @@ namespace VioRentals.Controllers
                 var viewModel = new NewCustomerViewModel
                 {
                     Customer = customer,
-                    MembershipTypes = _context.MembershipTypes.ToList()
+                    MembershipTypes = _context.MembershipTypes.ToList(),
+                    //show the error message
+                    HasErrors = true
                 };
 
                 return View("CustomerForm", viewModel);

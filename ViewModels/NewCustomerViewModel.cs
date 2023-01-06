@@ -6,5 +6,6 @@ namespace VioRentals.ViewModels
     {
         public IEnumerable<MembershipType> MembershipTypes { get; set; }
         public Customer Customer { get; set; }
+        public bool HasErrors { get; set; }
     }
 }

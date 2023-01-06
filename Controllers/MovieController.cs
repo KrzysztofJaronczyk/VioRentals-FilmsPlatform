@@ -9,7 +9,7 @@ namespace VioRentals.Controllers
     public class MoviesController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        private bool HasErrors = false;
         public MoviesController(ApplicationDbContext context)
         {
             _context = context;
@@ -68,7 +68,9 @@ namespace VioRentals.Controllers
             {
                 var viewModel = new MovieFormViewModel(movie)
                 {
-                    Genres = _context.Genres.ToList()
+                    Genres = _context.Genres.ToList(),
+                    //show the error message
+                    HasErrors = true
                 };
                 return View("MovieForm", viewModel);
             }

@@ -6,6 +6,8 @@ namespace VioRentals.ViewModels
 {
     public class MovieFormViewModel
     {
+        internal bool HasErrors;
+
         public IEnumerable<Genre> Genres { get; set; }
         public int Id { get; set; }
 

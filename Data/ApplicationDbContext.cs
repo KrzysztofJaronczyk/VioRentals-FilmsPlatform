@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VioRentals.Models;
+using VioRentals.Dtos;
 namespace VioRentals.Data
 {
     public class ApplicationDbContext : IdentityDbContext
@@ -22,6 +23,8 @@ namespace VioRentals.Data
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=VioRentals;Trusted_Connection=True;");
         }
+
+        public DbSet<VioRentals.Dtos.MovieDto> MovieDto { get; set; }
         
     }
 }

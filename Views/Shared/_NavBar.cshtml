@@ -7,13 +7,13 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">New Rental</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" asp-controller="Customers" asp-action="Index">Customers</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" asp-controller="Movies" asp-action="Index">Movies</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Movies" asp-action="Random">Movies</a>
+                    <a class="nav-link" asp-controller="Movies" asp-action="Index">Movies</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Extras</a>
@@ -36,6 +36,21 @@
 
 
 <script>
+const navLinks = document.querySelectorAll('.nav-link');
+const currentPathname = location.pathname.split('/');
+
+for (const navLink of navLinks) {
+    const href = navLink.getAttribute('href').split('/');
+
+    if (href[1] === currentPathname[1]) {
+        navLink.classList.add('active');
+    } else {
+        navLink.classList.remove('active');
+    }
+}
+</script>
+
+@*<script>
     const navLinks = document.querySelectorAll('.nav-link');
 
     for (const navLink of navLinks) {
@@ -46,17 +61,4 @@
         }
     }
 </script>
-
-
-@*<script>
-    window.addEventListener('popstate', function () {
-        for (const navLink of navLinks) {
-            if (navLink.getAttribute('href') === location.pathname) {
-                navLink.classList.add('active');
-            } else {
-                navLink.classList.remove('active');
-            }
-        }
-    });
-
-</script>*@
+*@

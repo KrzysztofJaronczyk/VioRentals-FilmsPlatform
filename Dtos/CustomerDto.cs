@@ -1,22 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
-using VioRentals.Models;
 
-namespace VioRentals.Dtos
+namespace VioRentals.Dtos;
+
+public class CustomerDto
 {
-    public class CustomerDto
-    {
-        public int Id { get; set; }
-        [StringLength(100)]
-        public string Name { get; set; }
+    public int Id { get; set; }
 
-        [StringLength(100)]
-        public string Surname { get; set; }
+    [StringLength(100)] public string Name { get; set; }
 
-        public DateTime? DateOfBirth { get; set; }
+    [StringLength(100)] public string Surname { get; set; }
 
-        public bool IsSubscribedToNewsletter { get; set; }
+    public DateTime? DateOfBirth { get; set; }
 
-        public byte MembershipTypeId { get; set; }
-    }
+    public bool IsSubscribedToNewsletter { get; set; }
+
+    public byte MembershipTypeId { get; set; }
 }

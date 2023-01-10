@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<VioRentals.Models.Customer>
+﻿@model IEnumerable<Customer>
 
 @{
     ViewBag.Title = "Customers";
@@ -17,8 +16,6 @@
 }
 else
 {
-
-    
     <table id="customers" class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -33,7 +30,7 @@ else
         {
             <tr>
                 <td>
-                    @Html.ActionLink(customer.Name+" "+customer.Surname, "Edit", "Customers", new { id = customer.Id }, null)
+                    @Html.ActionLink(customer.Name + " " + customer.Surname, "Edit", "Customers", new { id = customer.Id }, null)
                 </td>
                 <td>
                     @customer.MembershipType.DiscountRate%
@@ -42,7 +39,7 @@ else
                     @customer.MembershipType.Name
                 </td>
                 <td>
-                        <button class="btn btn-warning" onclick="deleteCustomer(@customer.Id)">Delete</button>
+                    <button class="btn btn-warning" onclick="deleteCustomer(@customer.Id)">Delete</button>
                 </td>
             </tr>
         }
@@ -71,7 +68,7 @@ else
 
 
 @*remove customer from the table row and the database
-*@    
+*@
 
 <script>
     function deleteCustomer(id) {
@@ -103,8 +100,3 @@ else
         });
     });
 </script>
-
-
-
-
-

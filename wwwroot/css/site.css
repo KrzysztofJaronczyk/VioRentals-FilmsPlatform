@@ -1,29 +1,19 @@
-html {
-  font-size: 14px;
-}
+html { font-size: 14px; }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html { font-size: 16px; }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    min-height: 100%;
+    position: relative;
 }
 
-body {
-  margin-bottom: 60px;
-}
+body { margin-bottom: 60px; }
 
-.field-validation-error {
-    color: #a94442;
-}
+.field-validation-error { color: #a94442; }
 
-.input-validation-error {
-    border-color: #a94442;
-}
+.input-validation-error { border-color: #a94442; }
 
 .navbar-nav a.active {
     color: white;

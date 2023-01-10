@@ -1,22 +1,21 @@
 ﻿using AutoMapper;
 using VioRentals.Models;
 
-namespace VioRentals.Dtos
+namespace VioRentals.Dtos;
+
+public class MappingProfile : Profile
 {
-    public class MappingProfile : Profile
+    public MappingProfile()
     {
-        public MappingProfile()
-        {
-            // Domain to Dto
-            CreateMap<Customer, CustomerDto>();
-            CreateMap<Movie, MovieDto>();
+        // Domain to Dto
+        CreateMap<Customer, CustomerDto>();
+        CreateMap<Movie, MovieDto>();
 
-            // Dto to Domain
-            CreateMap<CustomerDto, Customer>()
-                .ForMember(c => c.Id, opt => opt.Ignore());
+        // Dto to Domain
+        CreateMap<CustomerDto, Customer>()
+            .ForMember(c => c.Id, opt => opt.Ignore());
 
-            CreateMap<MovieDto, Movie>()
-                .ForMember(c => c.Id, opt => opt.Ignore());
-        }
+        CreateMap<MovieDto, Movie>()
+            .ForMember(c => c.Id, opt => opt.Ignore());
     }
 }

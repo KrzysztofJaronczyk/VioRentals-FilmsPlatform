@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using VioRentals.Data;
-using VioRentals.Dtos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,19 +51,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "MoviesByRelaseDate",
-    pattern: "{controller=Movies}/{action=ByReleaseDate}/{id?}");
+    "MoviesByRelaseDate",
+    "{controller=Movies}/{action=ByReleaseDate}/{id?}");
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    "default",
+    "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Customers API V1");
-});
+app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Customers API V1"); });
 
 app.Run();
-

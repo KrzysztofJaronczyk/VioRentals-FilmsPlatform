@@ -21,7 +21,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Customer.MembershipTypeId)
-        @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"),  new { @class = "form-control" })
+        @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Customer.MembershipTypeId)
     </div>
     <div class="form-group">
@@ -35,12 +35,12 @@
         </label>
     </div>
     @if (Model.HasErrors)
-          {
-              <div class="alert alert-dismissible alert-warning" id="error-message">
-                  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                  <strong>Woooops!</strong> Fix the errors and try submitting again.
-              </div>
-          }
+    {
+        <div class="alert alert-dismissible alert-warning" id="error-message">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Woooops!</strong> Fix the errors and try submitting again.
+        </div>
+    }
 
     @Html.HiddenFor(m => m.Customer.Id)
     @Html.AntiForgeryToken()

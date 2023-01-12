@@ -6,7 +6,7 @@
 }
 
 <h2>Customers</h2>
-<p>
+<p id="new">
     @Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-primary" })
 </p>
 
@@ -16,6 +16,11 @@
 }
 else
 {
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Enter customers data to search..." id="search-input" aria-describedby="button-addon2">
+        <button class="btn btn-primary" type="button" id="search-btn">Search</button>
+    </div>
+
     <table id="customers" class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -45,6 +50,49 @@ else
         }
         </tbody>
     </table>
+    //razor
+    <div>
+        <ul class="pagination">
+            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @{
+                int startPage = (ViewBag.CurrentPage - 1) / 10 * 10 + 1;
+                int endPage = startPage + 9;
+                if (endPage > ViewBag.TotalPages)
+                {
+                    endPage = ViewBag.TotalPages;
+                }
+            }
+            @for (int i = startPage; i <= endPage; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                </li>
+            }
+            <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+                </li>
+            <form class="form-inline w-100" method="get" action="@Url.Action("Index")">
+                <div class="form-group mx-sm-3">
+                    <div class="input-group mb-3">
+                        <input type="number" min="1" max="@ViewBag.TotalPages" class="form-control" id="jumpToPage" name="page" placeholder="Jump To Page  (value from 1 to @ViewBag.TotalPages)">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary" id="button-addon2">Jump</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            
+        </ul>
+
+    </div>
     <div class="modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -59,7 +107,7 @@ else
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="confirm" class="btn btn-primary">Delete</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" id="close" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -94,9 +142,129 @@ else
             $('.modal').fadeOut(1500);
         });
     });
-    document.querySelector('.btn.btn-secondary').addEventListener('click', () => {
+    document.querySelector('.btn-info').addEventListener('click', () => {
         setTimeout(function () {
             $('.modal').fadeOut(1500);
         });
     });
+</script>
+
+<script>
+let currentPage = 1;
+let rowsPerPage = 10;
+
+// this function will be called when the next or prev buttons are clicked
+function updateTable() {
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
+    const $customersRows = $("#customers tbody tr");
+    $customersRows.hide();
+    $customersRows.slice(startIndex, endIndex).show();
+}
+
+$(".btn-secondary").click(function(){
+    currentPage = $(this).text();
+    updateTable();
+});
+
+</script>
+
+<script>
+    //searchbar functionality
+    document.getElementById("search-btn").addEventListener("click", function () {
+        var searchTerm = document.getElementById("search-input").value;
+        $.ajax({
+            type: "GET",
+            url: "/Customers/Search",
+            data: { searchTerm: searchTerm },
+            success: function (response) {
+                var $customers = $("#customers tbody");
+                $customers.empty();
+                if (response.length == 1) {
+                    var target = document.getElementById("new");
+                    if (target) {
+                        target.insertAdjacentHTML('afterend', `<div class="card text-white bg-success mb-3 center-div" style="max-width: 20rem;">
+                <div class="card-header">Success</div>
+                <div class="card-body">
+                    <h4 class="card-title">Search complete</h4>
+                    <p class="card-text">Succesfully found one matching user.</p>
+                </div>
+            </div>`);
+                        setTimeout(function () {
+                            $('.center-div').fadeOut(1500);
+                        }, 3000);
+                    }
+                }
+            
+                    if(response.length > 1) {
+            var target = document.getElementById("new");
+            if (target) {
+                target.insertAdjacentHTML('afterend', `<div class="card text-white bg-success mb-3 center-div" style="max-width: 20rem;">
+                <div class="card-header">Success</div>
+                <div class="card-body">
+                    <h4 class="card-title">Search complete</h4>
+                    <p class="card-text">Succesfully found ${response.length} matching users.</p>
+                </div>
+            </div>`);
+                setTimeout(function () {
+                    $('.center-div').fadeOut(1500);
+                }, 3000);
+            }
+        }
+
+        if (response.length == 0) {
+            var target = document.getElementById("new");
+            if (target) {
+                target.insertAdjacentHTML('afterend', `<div class="card text-white bg-danger mb-3 center-div" style="max-width: 20rem;">
+                            <div class="card-header">Not found</div>
+                                <div class="card-body">
+                                    <h4 class="card-title
+                                    ">Search complete</h4>
+                                    <p class="card-text">No matching users found.</p>
+                                    </div>
+                                    </div>`);
+                setTimeout(function () {
+                    $('.center-div').fadeOut(1500);
+                }, 3000);
+            }
+        }
+
+
+        //console.log(response.length);
+                $.each(response, function (index, customer) {
+                    $customers.append(`<tr>
+                            <td>
+                                <a href="/Customers/Edit/${customer.id}">${customer.name} ${customer.surname}</a>
+                            </td>
+                            <td>
+                                ${customer.membershipType.discountRate}%
+                            </td>
+                            <td>
+                                ${customer.membershipType.name}
+                            </td>
+                            <td>
+                                <button class="btn btn-warning" onclick="deleteCustomer(${customer.id})">Delete</button>
+                            </td>
+                                </tr>`);
+                                
+                }); 
+            },
+        });
+    });
+
+</script>
+
+
+<script>
+//if page is active highlight the page number
+$ (function () {
+    var url = window.location.href;
+    var activePage = url;
+    $('.pagination li a').each(function () {
+        var linkPage = this.href;
+        if (activePage == linkPage) {
+            $(this).closest("li").addClass("active");
+        }
+    });
+});
 </script>

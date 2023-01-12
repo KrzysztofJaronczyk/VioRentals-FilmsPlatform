@@ -69,12 +69,53 @@ public class CustomersController : Controller
         return RedirectToAction("Index", "Customers");
     }
 
-    public ViewResult Index()
+    public ViewResult Index(int page = 1)
     {
-        var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+        int pageSize = 10;
+        int totalPages = (int)Math.Ceiling((double)_context.Customers.Count() / pageSize);
+        
+        //check if user enters value higher than totalpages and set the value to the hightes pagenumber availabe
+        if (page > totalPages)
+        {
+            page = totalPages;
+            //optional
+            Response.Redirect("/Customers/Index?page=" + page);
+        }
+        else if (page < 1)
+        {
+            page = 1;
+            Response.Redirect("/Customers/Index?page=" + page);
+        }
+        var customers = _context.Customers
+            .Include(c => c.MembershipType)
+            .OrderBy(c => c.Name)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+        //pass to view
+        ViewBag.TotalPages = totalPages;
+        ViewBag.CurrentPage = page;
+
+
 
         return View(customers);
     }
+
+    public JsonResult Search(string searchTerm)
+    {
+        var result = _context.Customers.Where(c => c.Name.Contains(searchTerm) || c.Surname.Contains(searchTerm))
+            .Select(c => new
+            {
+                c.Id,
+                c.Name,
+                c.Surname,
+                c.DateOfBirth,
+                c.MembershipType,
+                c.IsSubscribedToNewsletter
+            }).ToList();
+        return Json(result);
+    }
+
 
     public ActionResult Details(int id)
     {

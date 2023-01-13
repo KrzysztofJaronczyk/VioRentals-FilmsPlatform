@@ -50,34 +50,51 @@ else
         }
         </tbody>
     </table>
+
     //razor
-    <div>
-        <ul class="pagination">
-            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            @{
-                int startPage = (ViewBag.CurrentPage - 1) / 10 * 10 + 1;
-                int endPage = startPage + 9;
-                if (endPage > ViewBag.TotalPages)
-                {
-                    endPage = ViewBag.TotalPages;
+    <div class="d-flex justify-content-center">
+        <div class="w-100">
+            <ul class="pagination">
+                <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1, pageSize = ViewBag.PageSize })" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                @{
+                    int startPage = (ViewBag.CurrentPage - 1) / 10 * 10 + 1;
+                    int endPage = startPage + 9;
+                    if (endPage > ViewBag.TotalPages)
+                    {
+                        endPage = ViewBag.TotalPages;
+                    }
                 }
-            }
-            @for (int i = startPage; i <= endPage; i++)
-            {
-                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                    <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                @for (int i = startPage; i <= endPage; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = i, pageSize = ViewBag.PageSize })" >@i</a>
+                    </li>
+                }
+                <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1, pageSize = ViewBag.PageSize })" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
                 </li>
-            }
-            <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-                </li>
-            <form class="form-inline w-100" method="get" action="@Url.Action("Index")">
+            </ul>
+        </div>
+
+        <div class="w-100">
+            <label for="page-size-select" class="form-label">
+                <select id="page-size-select" class="form-select w-100" onchange="updatePageSize()">
+                    <option value="" disabled selected hidden>Records per page (currently @ViewBag.PageSize)</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </label>
+        </div>
+        <div class="w-100">
+            <form method="get" action="@Url.Action("Index", new { pageSize = ViewBag.PageSize })">
                 <div class="form-group mx-sm-3">
                     <div class="input-group mb-3">
                         <input type="number" min="1" max="@ViewBag.TotalPages" class="form-control" id="jumpToPage" name="page" placeholder="Jump To Page  (value from 1 to @ViewBag.TotalPages)">
@@ -86,12 +103,9 @@ else
                         </div>
                     </div>
                 </div>
+                <input type="hidden" name="pageSize" value="@ViewBag.PageSize">
             </form>
-
-
-            
-        </ul>
-
+        </div>
     </div>
     <div class="modal">
         <div class="modal-dialog" role="document">
@@ -114,6 +128,17 @@ else
     </div>
 }
 
+
+<script>
+    function updatePageSize() {
+        var pageSize = document.getElementById("page-size-select").value;
+        var url = new URL(window.location.href);
+        url.searchParams.set("pageSize", pageSize);
+        window.location.href = url;
+        //pass value to controller
+        
+    }
+</script>
 
 @*remove customer from the table row and the database
 *@
@@ -147,6 +172,7 @@ else
             $('.modal').fadeOut(1500);
         });
     });
+
 </script>
 
 <script>

@@ -69,22 +69,31 @@ public class CustomersController : Controller
         return RedirectToAction("Index", "Customers");
     }
 
-    public ViewResult Index(int page = 1)
+    public ViewResult Index(int page = 1, int pageSize = 10)
     {
-        int pageSize = 10;
         int totalPages = (int)Math.Ceiling((double)_context.Customers.Count() / pageSize);
-        
         //check if user enters value higher than totalpages and set the value to the hightes pagenumber availabe
         if (page > totalPages)
         {
             page = totalPages;
             //optional
-            Response.Redirect("/Customers/Index?page=" + page);
+            Response.Redirect("/Customers/Index?page=" + page + "&pageSize=" + pageSize);
         }
         else if (page < 1)
         {
             page = 1;
-            Response.Redirect("/Customers/Index?page=" + page);
+            Response.Redirect("/Customers/Index?page=" + page + "&pageSize=" + pageSize);
+        }
+
+        if (pageSize < 1)
+        {
+            pageSize = 1;
+            Response.Redirect("/Customers/Index?page=" + page + "&pageSize=" + pageSize);
+        }
+        else if (pageSize > 100)
+        {
+            pageSize = 100;
+            Response.Redirect("/Customers/Index?page=" + page + "&pageSize=" + pageSize);
         }
         var customers = _context.Customers
             .Include(c => c.MembershipType)
@@ -95,8 +104,7 @@ public class CustomersController : Controller
         //pass to view
         ViewBag.TotalPages = totalPages;
         ViewBag.CurrentPage = page;
-
-
+        ViewBag.PageSize = pageSize;
 
         return View(customers);
     }

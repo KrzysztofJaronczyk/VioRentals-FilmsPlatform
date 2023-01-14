@@ -129,20 +129,17 @@ else
 }
 
 
+
+@*page size dropdown*@
 <script>
     function updatePageSize() {
         var pageSize = document.getElementById("page-size-select").value;
         var url = new URL(window.location.href);
         url.searchParams.set("pageSize", pageSize);
         window.location.href = url;
-        //pass value to controller
-        
     }
 </script>
-
-@*remove customer from the table row and the database
-*@
-
+@*remove customer from the table row and the database*@
 <script>
     function deleteCustomer(id) {
         //document.querySelector('.modal').style.display = 'block';
@@ -174,29 +171,8 @@ else
     });
 
 </script>
-
+@*searchbar functionality*@
 <script>
-let currentPage = 1;
-let rowsPerPage = 10;
-
-// this function will be called when the next or prev buttons are clicked
-function updateTable() {
-    const startIndex = (currentPage - 1) * rowsPerPage;
-    const endIndex = startIndex + rowsPerPage;
-    const $customersRows = $("#customers tbody tr");
-    $customersRows.hide();
-    $customersRows.slice(startIndex, endIndex).show();
-}
-
-$(".btn-secondary").click(function(){
-    currentPage = $(this).text();
-    updateTable();
-});
-
-</script>
-
-<script>
-    //searchbar functionality
     document.getElementById("search-btn").addEventListener("click", function () {
         var searchTerm = document.getElementById("search-input").value;
         $.ajax({
@@ -254,8 +230,6 @@ $(".btn-secondary").click(function(){
                 }, 3000);
             }
         }
-
-
         //console.log(response.length);
                 $.each(response, function (index, customer) {
                     $customers.append(`<tr>
@@ -272,17 +246,13 @@ $(".btn-secondary").click(function(){
                                 <button class="btn btn-warning" onclick="deleteCustomer(${customer.id})">Delete</button>
                             </td>
                                 </tr>`);
-                                
                 }); 
             },
         });
     });
-
 </script>
-
-
+@*pagination active highlight*@
 <script>
-//if page is active highlight the page number
 $ (function () {
     var url = window.location.href;
     var activePage = url;

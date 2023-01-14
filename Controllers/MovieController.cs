@@ -16,11 +16,63 @@ public class MoviesController : Controller
         _context = context;
     }
 
-    public IActionResult Index()
+    public ViewResult Index(int page = 1, int pageSize = 10)
     {
-        var movies = _context.Movies.Include(m => m.Genre).ToList();
+        int totalPages = (int)Math.Ceiling((double)_context.Movies.Count() / pageSize);
+        //check if user enters value higher than totalpages and set the value to the hightes pagenumber availabe
+        if (page > totalPages)
+        {
+            page = totalPages;
+            Response.Redirect("/Movies/Index?page=" + page + "&pageSize=" + pageSize);
+        }
+        else if (page < 1)
+        {
+            page = 1;
+            Response.Redirect("/Movies/Index?page=" + page + "&pageSize=" + pageSize);
+        }
+
+        if (pageSize < 1)
+        {
+            pageSize = 10;
+            page = 1;
+            Response.Redirect("/Movies/Index?page=" + page + "&pageSize=" + pageSize);
+        }
+        else if (pageSize > 100)
+        {
+            pageSize = 100;
+            Response.Redirect("/Movies/Index?page=" + page + "&pageSize=" + pageSize);
+        }
+        var movies = _context.Movies
+            .Include(m => m.Genre)
+            .OrderBy(m => m.Name)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+        //pass to view
+        ViewBag.TotalPages = totalPages;
+        ViewBag.CurrentPage = page;
+        ViewBag.PageSize = pageSize;
+
         return View(movies);
     }
+    
+    public JsonResult Search(string searchTerm)
+    {
+        var result = _context.Movies.Where(m => m.Name.Contains(searchTerm) || m.Genre.Name.Contains(searchTerm))
+            .Select(m => new
+            {
+                m.Id,
+                m.Name,
+                m.Genre,
+                m.ReleaseDate,
+                m.DateAdded,
+                m.NumberInStock
+            }).ToList();
+        return Json(result);
+    }
+
+
+
 
     public ViewResult New()
     {

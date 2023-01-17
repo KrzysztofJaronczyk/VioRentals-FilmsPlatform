@@ -30,6 +30,7 @@ public class Movie
     [Required(ErrorMessage = "Please enter a value for the number in stock.")]
 
     public byte? NumberInStock { get; set; }
+    public byte NumberAvailable { get; set; }
 }
 
 //may add this to seperated file

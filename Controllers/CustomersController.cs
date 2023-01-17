@@ -84,7 +84,6 @@ public class CustomersController : Controller
             page = 1;
             Response.Redirect("/Customers/Index?page=" + page + "&pageSize=" + pageSize);
         }
-
         if (pageSize < 1)
         {
             pageSize = 10;

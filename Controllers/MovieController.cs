@@ -66,7 +66,8 @@ public class MoviesController : Controller
                 m.Genre,
                 m.ReleaseDate,
                 m.DateAdded,
-                m.NumberInStock
+                m.NumberInStock,
+                m.NumberAvailable
             }).ToList();
         return Json(result);
     }

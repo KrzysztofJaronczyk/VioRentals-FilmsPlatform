@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VioRentals.Data;
+using VioRentals.Models;
 
 namespace VioRentals.Controllers
 {
@@ -14,6 +15,7 @@ namespace VioRentals.Controllers
         {
             return View();
         }
+
 
         public JsonResult Search(string searchTerm)
         {

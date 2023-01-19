@@ -18,7 +18,7 @@ public class MoviesController : Controller
 
     public ViewResult Index(int page = 1, int pageSize = 10)
     {
-        int totalPages = (int)Math.Ceiling((double)_context.Movies.Count() / pageSize);
+        var totalPages = (int)Math.Ceiling((double)_context.Movies.Count() / pageSize);
         //check if user enters value higher than totalpages and set the value to the hightes pagenumber availabe
         if (page > totalPages)
         {
@@ -42,6 +42,7 @@ public class MoviesController : Controller
             pageSize = 100;
             Response.Redirect("/Movies/Index?page=" + page + "&pageSize=" + pageSize);
         }
+
         var movies = _context.Movies
             .Include(m => m.Genre)
             .OrderBy(m => m.Name)
@@ -55,7 +56,7 @@ public class MoviesController : Controller
 
         return View(movies);
     }
-    
+
     public JsonResult Search(string searchTerm)
     {
         var result = _context.Movies.Where(m => m.Name.Contains(searchTerm) || m.Genre.Name.Contains(searchTerm))
@@ -71,8 +72,6 @@ public class MoviesController : Controller
             }).ToList();
         return Json(result);
     }
-
-
 
 
     public ViewResult New()

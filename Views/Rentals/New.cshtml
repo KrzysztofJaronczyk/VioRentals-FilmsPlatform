@@ -254,9 +254,9 @@
 <script>
     $("#submit-btn").click(function () {
         var selectedId = document.getElementById("search-results").value;
-        console.log(selectedId);
+        //console.log(selectedId);
         var selectedMoviesIds = window.globalSelectedMoviesIds;
-        console.log(selectedMoviesIds);
+        //console.log(selectedMoviesIds);
         $.ajax({
             type: "POST",
             url: "/api/NewRentals",
@@ -264,7 +264,7 @@
             data: JSON.stringify({ customerId: selectedId, movieIds: selectedMoviesIds }),
 
             success: function (response) {
-                console.log(response);
+                //console.log(response);
                 var target = document.getElementById("search-results").parentNode;
                 target.insertAdjacentHTML('afterend', `<div class="card text-white bg-success mb-3 center-div" style="max-width: 20rem;">
                                         <div class="card-header">Success</div>
@@ -281,14 +281,14 @@
                 }, 3000);
             },
                                                 error: function (response) {
-                                                    console.log(response);
+                                                    //console.log(response);
                                                     var target = document.getElementById("search-results").parentNode;
                                                     target.insertAdjacentHTML('afterend', `<div class="card text-white bg-danger mb-3 center-div" style="max-width: 20rem;">
                                                     <div class="card-header">Error</div>
                                                     <div class="card-body">
                                                             <h4 class="card-title
-                                                            ">Error</h4>
-                                                            <p class="card-text">Error while adding rental.</p>
+                                                                ">Error while adding rental.</h4>
+                                                            <p class="card-text">Please make sure, that all fields are filled in.</p>
                                                             </div>
                                                             </div>`);
                                                             setTimeout(function () {

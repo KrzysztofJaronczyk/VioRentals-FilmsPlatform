@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VioRentals.Data;
 using VioRentals.Dtos;
@@ -28,7 +27,7 @@ namespace VioRentals.Controllers.Api
 
             if (newRental.CustomerId == null)
                 return BadRequest("Customer Id is not valid.");
-            
+
             var movies = _context.Movies.Where(
                 m => newRental.MovieIds.Contains(m.Id)).ToList();
 
@@ -123,8 +122,8 @@ namespace VioRentals.Controllers.Api
 
             return Ok();
         }
-        
-        
+
+
 
     }
 }

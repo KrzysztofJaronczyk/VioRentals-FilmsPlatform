@@ -71,7 +71,7 @@ public class CustomersController : Controller
 
     public ViewResult Index(int page = 1, int pageSize = 10)
     {
-        int totalPages = (int)Math.Ceiling((double)_context.Customers.Count() / pageSize);
+        var totalPages = (int)Math.Ceiling((double)_context.Customers.Count() / pageSize);
         //check if user enters value higher than totalpages and set the value to the hightes pagenumber availabe
         if (page > totalPages)
         {
@@ -84,6 +84,7 @@ public class CustomersController : Controller
             page = 1;
             Response.Redirect("/Customers/Index?page=" + page + "&pageSize=" + pageSize);
         }
+
         if (pageSize < 1)
         {
             pageSize = 10;
@@ -95,6 +96,7 @@ public class CustomersController : Controller
             pageSize = 100;
             Response.Redirect("/Customers/Index?page=" + page + "&pageSize=" + pageSize);
         }
+
         var customers = _context.Customers
             .Include(c => c.MembershipType)
             .OrderBy(c => c.Name)

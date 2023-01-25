@@ -35,29 +35,31 @@
     <div class="accordion" id="accordionExample2">
         @if (Model.Users.Any())
         {
-            <a href="#" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#collapseAll" aria-expanded="false" aria-controls="collapseAll">Add Users</a>
-            <a href="#" class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#collapseAll" aria-expanded="false" aria-controls="collapseAll">Remove Users</a>
             @foreach (var user in Model.Users)
             {
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-@user" aria-expanded="false" aria-controls="collapseOne-@user">
-                            @user
-                        </button>
-                    </h2>
+                <table class="table table-dark">
+                    <thead>
+                    <tr>
+                            <th scope="col">@user</th>
+                    </tr>
+                    </thead>
+                </table>
+
                     <div id="collapseOne-@user" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample2">
                         <div class="accordion-body">
                             <a asp-action="EditRole" asp-route-id="@user" class="btn btn-primary">Edit</a>
                             <a asp-action="DeleteRole" asp-route-id="@user" class="btn btn-danger">Delete</a>
                         </div>
                     </div>
-                </div>
+   
             }
         }
         else
         {
             <h3>No users in this role</h3>
         }
+        <a asp-action="EditUsersInRole" asp-controller="Administration"
+           asp-route-roleId="@Model.Id" class="btn btn-primary" style="width:auto">Edit Users in Role</a>
     </div>
 
 </form>

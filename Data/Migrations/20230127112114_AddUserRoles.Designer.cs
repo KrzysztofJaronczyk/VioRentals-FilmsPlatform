@@ -12,14 +12,14 @@ using VioRentals.Data;
 namespace VioRentals.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230118200316_test")]
-    partial class test
+    [Migration("20230127112114_AddUserRoles")]
+    partial class AddUserRoles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.12")
+                .HasAnnotation("ProductVersion", "6.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);

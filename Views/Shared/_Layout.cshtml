@@ -17,14 +17,13 @@
         @RenderBody()
     </main>
 </div>
-    @if (ViewContext.RouteData.Values["action"].ToString() != "Details" || ViewContext.RouteData.Values["controller"].ToString() != "Movies")
-    {
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; @DateTime.Now.Year - VioRentals - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>
-    }
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; @DateTime.Now.Year - VioRentals - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
 
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

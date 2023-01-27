@@ -21,10 +21,11 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Customers API",
-        Description = "Simple, demo API", Version = "v1"
-    }); //add auto mapper
+        Title = "Application API",
+        Description = "Simple Api testing goes here :)", Version = "v1"
+    });
 });
+//swagger/index.html
 
 //builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

@@ -26,7 +26,7 @@ public class MoviesController : ControllerBase
 
     // GET: api/Movies
     [HttpGet]
-    public IEnumerable<MovieDto> GetMovies()
+    public async Task<IEnumerable<MovieDto>> GetMovies()
     {
         return _mapper.Map<IEnumerable<MovieDto>>(_context.Movies.Include(c => c.Genre)
             .Where(m => m.NumberAvailable > 0));

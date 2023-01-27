@@ -3,6 +3,12 @@
 @inject UserManager<IdentityUser> UserManager
 
 <ul class="navbar-nav ml-auto">
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Administration" asp-action="ListRoles">Manage Roles</a>
+        </li>
+    }
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">

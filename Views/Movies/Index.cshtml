@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Movie>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@model IEnumerable<Movie>
 
 @{
     ViewBag.Title = "Movies";
@@ -6,16 +8,30 @@
 }
 
 <h2>Movies</h2>
-<p id="new">
-    @Html.ActionLink("New Movie", "New", "Movies", null, new { @class = "btn btn-primary" })
-</p>
-
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Employee"))
+{
+    <p id="new">
+        @Html.ActionLink("New Movie", "New", "Movies", null, new { @class = "btn btn-primary" })
+    </p>
+}
 @if (!Model.Any())
 {
     <p>We don't have any movies yet.</p>
 }
 else
 {
+    string userType = "User";
+    if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin")))
+    {
+        userType = "Admin";
+        if (User.IsInRole("Employee"))
+        {
+            userType = "Employee";
+        }
+    }
+
+
+    <input type="hidden" id="userType" value="@userType"/>
     <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Enter movie data to search..." id="search-input" aria-describedby="button-addon2">
         <button class="btn btn-primary" type="button" id="search-btn">Search</button>
@@ -27,15 +43,30 @@ else
             <th>Movie</th>
             <th>Genre</th>
             <th>Release Date</th>
-            <th>Delete</th>
+            <th>Availability</th>
+            <th>Details</th>
+
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Employee"))
+                {
+                    <th>Delete</th>
+                }
         </tr>
         </thead>
         <tbody>
+
         @foreach (var movie in Model)
         {
-            <tr>
+            <tr class="table-dark">
+
                 <td>
-                    @Html.ActionLink(movie.Name, "Edit", "Movies", new { id = movie.Id }, null)
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Employee"))
+                    {
+                        @Html.ActionLink(movie.Name, "Edit", "Movies", new { id = movie.Id }, null)
+                    }
+                    else
+                    {
+                        @movie.Name
+                    }
                 </td>
                 <td>
                     @movie.Genre.Name
@@ -44,7 +75,17 @@ else
                     @movie.ReleaseDate.Value.ToShortDateString()
                 </td>
                 <td>
-                <button class="btn btn-warning" onclick="deleteMovie(@movie.Id)">Delete</button>
+                    Available: <span class="badge bg-primary rounded-pill">@movie.NumberAvailable</span>
+                </td>
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Employee"))
+                {
+                    <td>
+                        <button class="btn btn-warning" onclick="deleteMovie(@movie.Id)">Delete</button>
+                    </td>
+                }
+                <td>
+                    <button class="btn btn-success" onclick="location.href='@Url.Action("Details", "Movies", new { id = movie.Id })'">Details</button>
+                </td>
             </tr>
         }
         </tbody>
@@ -169,6 +210,7 @@ else
             url: "/Movies/Search",
             data: { searchTerm: searchTerm },
             success: function (response) {
+                //console.log(response);
                 var $customers = $("#movies tbody");
                 $customers.empty();
                 if (response.length == 1) {
@@ -220,25 +262,52 @@ else
                     }
                 }
 
-
+                const userType = document.getElementById("userType");
                 //console.log(response.length);
-                $.each(response, function (index, movie) {
-                    $customers.append(`<tr>
-                                <td>
-                                       <a href="/Movies/Edit/${movie.id}">${movie.name}</a>
-                                       </td>
-                                       <td>${movie.genre.name}</td>
-                                    <td>
-                                        ${new Date(movie.releaseDate).toLocaleDateString()}
-                                    </td>
-                                       <td>
-                                       <button class="btn btn-warning" onclick="deleteMovie(${movie.id})">Delete</button>
-                                       </td>
-                                       </tr>`);
+                //for admins
+                if(userType !== null)
+                {
+                    if (userType.value === "Admin" || userType.value === "Employee") {
+                        $.each(response, function (index, movie) {
+                            $customers.append(`<tr>
+                                        <td>
+                                               <a href="/Movies/Edit/${movie.id}">${movie.name}</a>
+                                               </td>
+                                               <td>${movie.genre.name}</td>
+                                            <td>
+                                                ${new Date(movie.releaseDate).toLocaleDateString()}
+                                            </td>
+                                                  <td>Available: <span class="badge bg-primary rounded-pill">${movie.numberAvailable}</span></td>
+                                                              <td>
+                                                              <a href="/Movies/Details/${movie.id}" class="btn btn-success">Details</a> 
+                                                              </td>
+                                               <td>
+                                               <button class="btn btn-warning" onclick="deleteMovie(${movie.id})">Delete</button>
+                                               </td>
+                                               </tr>`);
+                        });
+                    } else {
+                        $.each(response, function (index, movie) {
+                            $customers.append(`<tr>
+                                           <td>${movie.name}</td>
+                                               <td>${movie.genre.name}</td>
+                                            <td>
+                                                ${new Date(movie.releaseDate).toLocaleDateString()}
+                                            </td>
+                                                                 <td>Available: <span class="badge bg-primary rounded-pill">${movie.numberAvailable}</span></td>
+                                                 <td>
+                                                  <a href="/Movies/Details/${movie.id}" class="btn btn-success btn-sm">Details</a>
+                                                               </td>
+                                                               </tr>`);
+                        });
+                        }
+                }
+                }
                 });
-            },
-        });
-    });
+                });
+                
+
+                
 </script>
 
 @*pagination active highlight*@

@@ -23,8 +23,9 @@ body { margin-bottom: 60px; }
 .card {
     left: 50%;
     position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    top: 120px;
+    transform: translate(-50%, 0);
+    z-index: 10;
 }
 
 .rounded {

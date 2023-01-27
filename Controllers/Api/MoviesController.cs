@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
 using VioRentals.Data;
 using VioRentals.Dtos;
 using VioRentals.Models;
@@ -9,6 +11,8 @@ namespace VioRentals.Controllers.Api;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = "Admin, Employee")]
+
 public class MoviesController : ControllerBase
 {
     private readonly ApplicationDbContext _context;

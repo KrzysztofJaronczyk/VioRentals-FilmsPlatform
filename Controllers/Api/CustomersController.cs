@@ -12,6 +12,8 @@ namespace VioRentals.Controllers.Api;
 
 [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
 [ApiController]
+[Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin, Employee")]
+
 public class CustomersController : ControllerBase
 {
     private readonly ApplicationDbContext _context;

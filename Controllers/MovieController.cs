@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
 using VioRentals.Data;
 using VioRentals.Models;
 using VioRentals.ViewModels;
@@ -73,7 +75,7 @@ public class MoviesController : Controller
         return Json(result);
     }
 
-
+    [Authorize(Roles = "Admin, Employee")]
     public ViewResult New()
     {
         var genres = _context.Genres.ToList();
@@ -86,6 +88,7 @@ public class MoviesController : Controller
         return View("MovieForm", viewModel);
     }
 
+    [Authorize(Roles = "Admin, Employee")]
     public ActionResult Edit(int id)
     {
         var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
@@ -114,6 +117,7 @@ public class MoviesController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin, Employee")]
     public ActionResult Save(Movie movie)
     {
         if (!ModelState.IsValid)

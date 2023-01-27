@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
 using VioRentals.Data;
 using VioRentals.Models;
 using VioRentals.ViewModels;
 
 namespace VioRentals.Controllers;
+
+[Authorize(Roles = "Admin, Employee")]
 
 public class CustomersController : Controller
 {

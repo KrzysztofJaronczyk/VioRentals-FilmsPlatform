@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace VioRentals.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;

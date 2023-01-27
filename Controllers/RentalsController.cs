@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
 using VioRentals.Data;
 
 namespace VioRentals.Controllers;
+[Authorize(Roles = "Admin, Employee")]
 
 public class RentalsController : Controller
 {

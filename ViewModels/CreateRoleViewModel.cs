@@ -1,10 +1,8 @@
 ﻿using Microsoft.Build.Framework;
 
-namespace VioRentals.ViewModels
+namespace VioRentals.ViewModels;
+
+public class CreateRoleViewModel
 {
-    public class CreateRoleViewModel
-    {
-        [Required]
-        public string RoleName { get; set; }
-    }
+    [Required] public string RoleName { get; set; }
 }

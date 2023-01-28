@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Data;
-using Microsoft.AspNetCore.Authorization;
-using VioRentals.Data;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VioRentals.Data;
 
 namespace VioRentals.Controllers;
-[Authorize(Roles = "Admin, Employee")]
 
+[Authorize(Roles = "Admin, Employee")]
 public class RentalsController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -52,7 +51,6 @@ public class RentalsController : Controller
 
         return Ok();
     }
-
 
 
     public JsonResult Search(string searchTerm)

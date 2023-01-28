@@ -15,7 +15,7 @@
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <div class="card-body">
-                        @for (int i = 0; i < Model.Count; i++)
+                        @for (var i = 0; i < Model.Count; i++)
                         {
                             <div class="form-check m-1">
                                 <input type="hidden" asp-for="@Model[i].UserId"/>

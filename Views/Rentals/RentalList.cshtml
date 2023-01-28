@@ -1,5 +1,4 @@
-﻿@using System.Collections;
-@model IEnumerable<Rental>
+﻿@model IEnumerable<Rental>
 
 
 @if (!Model.Any())
@@ -10,38 +9,40 @@ else
 {
     <table id="rentals" class="table table-bordered table-hover">
         <thead>
-            <tr>
-                <th>Rental ID</th>
-                <th>Customer</th>
-                <th>Movie</th>
-                <th>Date Rented</th>
-                <th>Date Returned</th>
-                <th>Returned</th>
-            </tr>
+        <tr>
+            <th>Rental ID</th>
+            <th>Customer</th>
+            <th>Movie</th>
+            <th>Date Rented</th>
+            <th>Date Returned</th>
+            <th>Returned</th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var rental in Model)
-            {
-                <tr class="table-dark">
-                    <td>@rental.Id</td>
-                    <td>@rental.Customer.Name @rental.Customer.Surname</td>
-                    <td>@rental.Movie.Name</td>
-                    <td>@rental.DateRented</td>
-                    <td>@rental.DateReturned</td>
-                    <td>
-                        @if (rental.DateReturned == null)
-                        {
-                            <button class="btn btn-warning" onclick="returnRental(@rental.Id)">Return</button>
-                        }
-                        else
-                        {
-                            <p><span class="badge bg-primary">Movie Returned</span></p>
-                        }
+        @foreach (var rental in Model)
+        {
+            <tr class="table-dark">
+                <td>@rental.Id</td>
+                <td>@rental.Customer.Name @rental.Customer.Surname</td>
+                <td>@rental.Movie.Name</td>
+                <td>@rental.DateRented</td>
+                <td>@rental.DateReturned</td>
+                <td>
+                    @if (rental.DateReturned == null)
+                    {
+                        <button class="btn btn-warning" onclick="returnRental(@rental.Id)">Return</button>
+                    }
+                    else
+                    {
+                        <p>
+                            <span class="badge bg-primary">Movie Returned</span>
+                        </p>
+                    }
 
-                    </td>
+                </td>
 
-                </tr>
-            }
+            </tr>
+        }
         </tbody>
 
     </table>

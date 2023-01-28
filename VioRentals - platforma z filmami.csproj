@@ -1,36 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-VioRentals-DD0A75D3-CD0A-4B65-969F-3F156F430A8F</UserSecretsId>
-    <RootNamespace>VioRentals</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>aspnet-VioRentals-DD0A75D3-CD0A-4B65-969F-3F156F430A8F</UserSecretsId>
+		<RootNamespace>VioRentals</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
-    <PackageReference Include="jquery.datatables" Version="1.10.15" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.13" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.13" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.13" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.13">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
-    <PackageReference Include="xunit" Version="2.4.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+		<PackageReference Include="jquery.datatables" Version="1.10.15" />
+		<PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.9" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.13" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.13" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.13" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.13">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+		<PackageReference Include="xunit" Version="2.4.2" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Movies\Random.cshtml" />
-  </ItemGroup>
+	<ItemGroup>
+		<UpToDateCheckInput Remove="Views\Movies\Random.cshtml" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Movies\Random.cshtml" />
-  </ItemGroup>
+	<ItemGroup>
+		<_ContentIncludedByDefault Remove="Views\Movies\Random.cshtml" />
+	</ItemGroup>
 
 </Project>

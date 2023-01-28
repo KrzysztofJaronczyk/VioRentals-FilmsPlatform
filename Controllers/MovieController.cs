@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
-using Microsoft.AspNetCore.Authorization;
 using VioRentals.Data;
 using VioRentals.Models;
 using VioRentals.ViewModels;

@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
-using Microsoft.AspNetCore.Authorization;
 using VioRentals.Data;
 using VioRentals.Models;
 using VioRentals.ViewModels;
@@ -9,7 +8,6 @@ using VioRentals.ViewModels;
 namespace VioRentals.Controllers;
 
 [Authorize(Roles = "Admin, Employee")]
-
 public class CustomersController : Controller
 {
     private readonly ApplicationDbContext _context;

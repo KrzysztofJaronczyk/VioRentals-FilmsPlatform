@@ -8,7 +8,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
-                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Employee"))
+                @if ((SignInManager.IsSignedIn(User) && User.IsInRole("Admin")) || User.IsInRole("Employee"))
                 {
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Rentals" asp-action="New" id="new-rental-link">New Rental</a>
@@ -34,7 +34,7 @@
                     </div>
                 </li>
             </ul>
-            <partial name ="_LoginPartial"/>
+            <partial name="_LoginPartial"/>
         </div>
     </div>
 </nav>

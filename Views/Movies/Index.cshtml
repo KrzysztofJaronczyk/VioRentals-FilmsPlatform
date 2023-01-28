@@ -1,5 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
+﻿@inject SignInManager<IdentityUser> SignInManager
+@using Microsoft.AspNetCore.Identity
 @model IEnumerable<Movie>
 
 @{
@@ -8,7 +8,7 @@
 }
 
 <h2>Movies</h2>
-@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Employee"))
+@if ((SignInManager.IsSignedIn(User) && User.IsInRole("Admin")) || User.IsInRole("Employee"))
 {
     <p id="new">
         @Html.ActionLink("New Movie", "New", "Movies", null, new { @class = "btn btn-primary" })
@@ -20,8 +20,8 @@
 }
 else
 {
-    string userType = "User";
-    if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin")))
+    var userType = "User";
+    if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
     {
         userType = "Admin";
         if (User.IsInRole("Employee"))
@@ -46,10 +46,10 @@ else
             <th>Availability</th>
             <th>Details</th>
 
-                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Employee"))
-                {
-                    <th>Delete</th>
-                }
+            @if ((SignInManager.IsSignedIn(User) && User.IsInRole("Admin")) || User.IsInRole("Employee"))
+            {
+                <th>Delete</th>
+            }
         </tr>
         </thead>
         <tbody>
@@ -59,7 +59,7 @@ else
             <tr class="table-dark">
 
                 <td>
-                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Employee"))
+                    @if ((SignInManager.IsSignedIn(User) && User.IsInRole("Admin")) || User.IsInRole("Employee"))
                     {
                         @Html.ActionLink(movie.Name, "Edit", "Movies", new { id = movie.Id }, null)
                     }
@@ -77,7 +77,7 @@ else
                 <td>
                     Available: <span class="badge bg-primary rounded-pill">@movie.NumberAvailable</span>
                 </td>
-                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Employee"))
+                @if ((SignInManager.IsSignedIn(User) && User.IsInRole("Admin")) || User.IsInRole("Employee"))
                 {
                     <td>
                         <button class="btn btn-warning" onclick="deleteMovie(@movie.Id)">Delete</button>

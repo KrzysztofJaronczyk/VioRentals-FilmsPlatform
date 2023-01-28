@@ -14,4 +14,5 @@ public class Rental
 
     public DateTime DateRented { get; set; }
     public DateTime? DateReturned { get; set; }
+    public bool Returned { get; set; }
 }

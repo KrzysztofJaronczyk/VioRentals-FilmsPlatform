@@ -32,4 +32,8 @@
 	<ItemGroup>
 		<_ContentIncludedByDefault Remove="Views\Movies\Random.cshtml" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\VioRentals.Core\VioRentals.Core.csproj" />
+	</ItemGroup>
 </Project>

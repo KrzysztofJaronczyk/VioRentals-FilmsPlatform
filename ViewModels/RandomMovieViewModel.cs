@@ -1,4 +1,4 @@
-﻿using VioRentals.Models;
+﻿using VioRentals.Core.Models;
 
 namespace VioRentals.ViewModels;
 

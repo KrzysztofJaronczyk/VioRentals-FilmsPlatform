@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using VioRentals.Models;
+using VioRentals.Core.Models;
+
 
 namespace VioRentals.ViewModels;
 

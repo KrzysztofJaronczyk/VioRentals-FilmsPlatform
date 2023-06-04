@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using VioRentals.Dtos;
-using VioRentals.Models;
+using VioRentals.Core.Dtos;
+using VioRentals.Core.Models;
 
 namespace VioRentals.Data;
 

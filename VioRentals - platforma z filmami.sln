@@ -4,8 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VioRentals - platforma z filmami", "VioRentals - platforma z filmami.csproj", "{AA2C2C58-5103-4C32-987B-11534098B6B2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{61F1768C-11D5-4585-B252-9BE192B09AD7} = {61F1768C-11D5-4585-B252-9BE192B09AD7}
+	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnitTests", "..\VioRentalsxUnitTests\xUnitTests.csproj", "{45CE095A-E51C-485C-A452-1AB8FE54C8AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VioRentals.Core", "..\VioRentals.Core\VioRentals.Core.csproj", "{61F1768C-11D5-4585-B252-9BE192B09AD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +20,10 @@ Global
 		{AA2C2C58-5103-4C32-987B-11534098B6B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA2C2C58-5103-4C32-987B-11534098B6B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA2C2C58-5103-4C32-987B-11534098B6B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{45CE095A-E51C-485C-A452-1AB8FE54C8AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45CE095A-E51C-485C-A452-1AB8FE54C8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45CE095A-E51C-485C-A452-1AB8FE54C8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45CE095A-E51C-485C-A452-1AB8FE54C8AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61F1768C-11D5-4585-B252-9BE192B09AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F1768C-11D5-4585-B252-9BE192B09AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F1768C-11D5-4585-B252-9BE192B09AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F1768C-11D5-4585-B252-9BE192B09AD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

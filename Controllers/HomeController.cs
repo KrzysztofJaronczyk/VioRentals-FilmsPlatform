@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using VioRentals.Models;
+using VioRentals.Core.Models;
 
 namespace VioRentals.Controllers;
 

@@ -2,9 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VioRentals.Core.Dtos;
+using VioRentals.Core.Models;
 using VioRentals.Data;
-using VioRentals.Dtos;
-using VioRentals.Models;
+
 
 namespace VioRentals.Controllers.Api;
 
